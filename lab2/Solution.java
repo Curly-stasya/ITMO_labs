@@ -10,19 +10,23 @@
 import java.util.Random;
 public class Solution {
     public static void main(String[] argc){
-        int M=4;
+        int M=5;
         int N=5;
-        Random random = new Random();
-        int[][] array = new int[M][N];
-        for (int i=0; i<M; i++){ //заполение матрицы псевдорандомными значениями
-            for (int j=0; j<N;j++){
-                array[i][j]= random.nextInt()%100;
-            }
-        }
+        int[][] array= initByRandom(M,N);
         print_2dimArr(array);
         System.out.println("Транспонированная матрица:");
         print_2dimArr(transposition(array));
+    }
 
+    public static int[][] initByRandom (int rows, int colms){//инициализация матрицы псевдорандомными значениями
+        Random random = new Random();
+        int[][] arr = new int[rows][colms];
+        for (int i=0; i< rows; i++){
+            for (int j=0; j<colms;j++){
+                arr[i][j]= random.nextInt()%100;
+            }
+        }
+        return arr;
     }
     public static void print_2dimArr(int [][] arr){//вывод двумерного массива
         for (int i=0; i< arr.length;i++){
@@ -34,12 +38,27 @@ public class Solution {
         System.out.println();
     }
     public static int[][] transposition(int[][] matrix){//транспонирование матрицы
-        int[][] matrixT = new int[matrix[0].length][matrix.length];//транспонированная матрица
-        for(int i=0;i<matrixT.length;i++){
-            for (int j=0;j<matrixT[0].length; j++){
-                matrixT[i][j]=matrix[j][i];
+        if(matrix.length== matrix[0].length){//квадратная или прямоугольная
+            int size=matrix.length;
+            int temp;
+            for(int i=0;i< matrix.length;i++){
+                for(int j=0;(j<size && j!=i); j++){
+                    temp=matrix[i][j];
+                    matrix[i][j]=matrix[j][i];
+                    matrix[j][i]=temp;
+                }
+                size--;
             }
+            return matrix;
         }
-        return matrixT;
+        else {
+            int[][] matrixT = new int[matrix[0].length][matrix.length];//транспонированная матрица
+            for (int i = 0; i < matrixT.length; i++) {
+                for (int j = 0; j < matrixT[0].length; j++) {
+                    matrixT[i][j] = matrix[j][i];
+                }
+            }
+            return matrixT;
+        }
     }
 }
