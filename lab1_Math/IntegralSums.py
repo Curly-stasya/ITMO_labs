@@ -7,7 +7,7 @@ from matplotlib.patches import Rectangle
 a=-1
 b=0
 N=100
-PointSelection="medium"
+PointSelection="medium" #left/right
 
 dx = (b-a)/N
 x = np.arange(a, b+0.01, 0.01)
@@ -16,9 +16,9 @@ sum=0.0
 
 
 
-xi_l=np.arange(a, b,dx) #левые точки
-xi_r=np.arange(a+dx,b+dx, dx)#правые
-xi_m=np.arange(a+0.5*dx,b,dx) #средние
+xi_l=np.arange(a, b,dx) #left points
+xi_r=np.arange(a+dx,b+dx, dx)#right
+xi_m=np.arange(a+0.5*dx,b,dx) #medium
 
 fig, ax = plt.subplots()
 ax.set_title('Selected '+ PointSelection+ ' points \n'+'Amount of points of partition - 100' + '\n y = sin(2x)', fontsize = 9)
